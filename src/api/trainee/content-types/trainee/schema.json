@@ -1,0 +1,97 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trainees",
+  "info": {
+    "singularName": "trainee",
+    "pluralName": "trainees",
+    "displayName": "Trainee",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name_tc": {
+      "type": "string"
+    },
+    "name_en": {
+      "type": "string"
+    },
+    "hkid": {
+      "type": "string"
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "M",
+        "F"
+      ]
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "birth": {
+      "type": "date"
+    },
+    "join_date": {
+      "type": "date"
+    },
+    "trainee_no": {
+      "type": "string"
+    },
+    "ehealth_applied": {
+      "type": "boolean"
+    },
+    "email": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "intellectual_level": {
+      "type": "string"
+    },
+    "diagnosis": {
+      "type": "text"
+    },
+    "food_allergy": {
+      "type": "text"
+    },
+    "drug_allergy": {
+      "type": "text"
+    },
+    "surgery_record": {
+      "type": "text"
+    },
+    "diet_type": {
+      "type": "string"
+    },
+    "injection_record": {
+      "type": "text"
+    },
+    "guardians": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::guardian.guardian",
+      "mappedBy": "trainee"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "branch": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::branch.branch",
+      "inversedBy": "trainees"
+    }
+  }
+}

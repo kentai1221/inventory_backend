@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "branches",
+  "info": {
+    "singularName": "branch",
+    "pluralName": "branches",
+    "displayName": "Branch",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "Description": {
+      "type": "blocks"
+    },
+    "users": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "mappedBy": "branches"
+    },
+    "name_en": {
+      "type": "string"
+    },
+    "json": {
+      "type": "json"
+    },
+    "trainees": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::trainee.trainee",
+      "mappedBy": "branch"
+    }
+  }
+}

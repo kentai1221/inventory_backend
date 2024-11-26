@@ -1,0 +1,22 @@
+{
+  "kind": "collectionType",
+  "collectionName": "revenues",
+  "info": {
+    "singularName": "revenue",
+    "pluralName": "revenues",
+    "displayName": "Revenue",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "month": {
+      "type": "string"
+    },
+    "revenue": {
+      "type": "integer"
+    }
+  }
+}

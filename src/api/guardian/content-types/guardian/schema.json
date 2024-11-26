@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guardians",
+  "info": {
+    "singularName": "guardian",
+    "pluralName": "guardians",
+    "displayName": "Guardian"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "relationship": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "trainee": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::trainee.trainee",
+      "inversedBy": "guardians"
+    }
+  }
+}
