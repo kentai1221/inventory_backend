@@ -39,11 +39,21 @@
       "inversedBy": "products"
     },
     "image": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "order_products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::order-product.order-product",
+      "mappedBy": "product"
+    },
+    "code": {
+      "type": "string"
     }
   }
 }

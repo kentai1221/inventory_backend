@@ -1,10 +1,10 @@
 /**
- * product service
+ * order service
  */
 
 import { factories } from '@strapi/strapi';
 
-export default factories.createCoreService('api::product.product',
+export default factories.createCoreService('api::order.order',
     ({ strapi }) => ({
         async count(ctx) {
             const { ...otherQueryParams } = ctx.request.query;
@@ -13,13 +13,13 @@ export default factories.createCoreService('api::product.product',
                 ...otherQueryParams
             }
 
-            const product = await strapi.documents('api::product.product').findMany({
+            const order = await strapi.documents('api::order.order').findMany({
                 status: 'published',
                 filters: filters
             });
 
             const res = {
-                count: product.length
+                count: order.length
             }
 
             return res;
@@ -31,7 +31,7 @@ export default factories.createCoreService('api::product.product',
                 ...(query && {
                   $or: [
                     { name: { $contains: query } },
-                    { product_status: { $contains: query } },
+                    { order_status: { $contains: query } },
                   ],
                 })
               };
@@ -39,27 +39,17 @@ export default factories.createCoreService('api::product.product',
             let res = null;
 
             if(typeof start!== 'undefined' && typeof limit!== 'undefined'){
-                res = await strapi.documents('api::product.product').findMany({
+                res = await strapi.documents('api::order.order').findMany({
                     status: 'published',
                     filters: filters,
                     limit: limit,
                     start: start,
-                    populate: {
-                        brand: true,
-                        category: true,
-                        image: true
-                    },
                 });
             }else{
-                res = await strapi.documents('api::product.product').count({
+                res = await strapi.documents('api::order.order').count({
                     filters: filters,
-                    populate: {
-                        brand: true,
-                        category: true
-                    },
                 });
             }
-
             return res;
         }
     })

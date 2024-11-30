@@ -640,6 +640,68 @@ export interface ApiJobJob extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'Order';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Schema.Attribute.String;
+    contact: Schema.Attribute.String;
+    order_date: Schema.Attribute.DateTime;
+    payment_type: Schema.Attribute.Enumeration<['cash', 'card']>;
+    payment_status: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
+    amount: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    payment_date: Schema.Attribute.DateTime;
+    order_products: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-product.order-product'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
+export interface ApiOrderProductOrderProduct
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'order_products';
+  info: {
+    singularName: 'order-product';
+    pluralName: 'order-products';
+    displayName: 'Order_product';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    order: Schema.Attribute.Relation<'manyToOne', 'api::order.order'>;
+    quantity: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    price: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    total: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -659,6 +721,11 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     brand: Schema.Attribute.Relation<'manyToOne', 'api::brand.brand'>;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     image: Schema.Attribute.Media<'images', true>;
+    order_products: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::order-product.order-product'
+    >;
+    code: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1106,6 +1173,8 @@ declare module '@strapi/strapi' {
       'api::guardian.guardian': ApiGuardianGuardian;
       'api::invoice.invoice': ApiInvoiceInvoice;
       'api::job.job': ApiJobJob;
+      'api::order.order': ApiOrderOrder;
+      'api::order-product.order-product': ApiOrderProductOrderProduct;
       'api::product.product': ApiProductProduct;
       'api::revenue.revenue': ApiRevenueRevenue;
       'api::trainee.trainee': ApiTraineeTrainee;
