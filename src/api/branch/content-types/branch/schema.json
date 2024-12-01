@@ -31,12 +31,6 @@
     },
     "json": {
       "type": "json"
-    },
-    "trainees": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::trainee.trainee",
-      "mappedBy": "branch"
     }
   }
 }

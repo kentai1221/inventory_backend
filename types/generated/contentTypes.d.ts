@@ -468,7 +468,6 @@ export interface ApiBranchBranch extends Struct.CollectionTypeSchema {
     >;
     name_en: Schema.Attribute.String;
     json: Schema.Attribute.JSON;
-    trainees: Schema.Attribute.Relation<'oneToMany', 'api::trainee.trainee'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -520,115 +519,6 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     category_status: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiCustomerCustomer extends Struct.CollectionTypeSchema {
-  collectionName: 'customers';
-  info: {
-    singularName: 'customer';
-    pluralName: 'customers';
-    displayName: 'Customer';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String;
-    email: Schema.Attribute.String;
-    image_url: Schema.Attribute.String;
-    name_en: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiGuardianGuardian extends Struct.CollectionTypeSchema {
-  collectionName: 'guardians';
-  info: {
-    singularName: 'guardian';
-    pluralName: 'guardians';
-    displayName: 'Guardian';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name: Schema.Attribute.String;
-    relationship: Schema.Attribute.String;
-    phone: Schema.Attribute.String;
-    trainee: Schema.Attribute.Relation<'manyToOne', 'api::trainee.trainee'>;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiInvoiceInvoice extends Struct.CollectionTypeSchema {
-  collectionName: 'invoices';
-  info: {
-    singularName: 'invoice';
-    pluralName: 'invoices';
-    displayName: 'Invoice';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    amount: Schema.Attribute.Decimal;
-    invoice_status: Schema.Attribute.String;
-    date: Schema.Attribute.DateTime;
-    customer: Schema.Attribute.Relation<'oneToOne', 'api::customer.customer'>;
-    address: Schema.Attribute.Text;
-    gender: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiJobJob extends Struct.CollectionTypeSchema {
-  collectionName: 'jobs';
-  info: {
-    singularName: 'job';
-    pluralName: 'jobs';
-    displayName: 'Job';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    job_id: Schema.Attribute.String &
-      Schema.Attribute.Required &
-      Schema.Attribute.Unique;
-    date: Schema.Attribute.Date;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -726,76 +616,6 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'api::order-product.order-product'
     >;
     code: Schema.Attribute.String;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiRevenueRevenue extends Struct.CollectionTypeSchema {
-  collectionName: 'revenues';
-  info: {
-    singularName: 'revenue';
-    pluralName: 'revenues';
-    displayName: 'Revenue';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    month: Schema.Attribute.String;
-    revenue: Schema.Attribute.Integer;
-    createdAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    publishedAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String;
-  };
-}
-
-export interface ApiTraineeTrainee extends Struct.CollectionTypeSchema {
-  collectionName: 'trainees';
-  info: {
-    singularName: 'trainee';
-    pluralName: 'trainees';
-    displayName: 'Trainee';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    name_tc: Schema.Attribute.String;
-    name_en: Schema.Attribute.String;
-    hkid: Schema.Attribute.String;
-    gender: Schema.Attribute.Enumeration<['M', 'F']>;
-    address: Schema.Attribute.String;
-    phone: Schema.Attribute.String;
-    birth: Schema.Attribute.Date;
-    join_date: Schema.Attribute.Date;
-    trainee_no: Schema.Attribute.String;
-    ehealth_applied: Schema.Attribute.Boolean;
-    email: Schema.Attribute.String;
-    age: Schema.Attribute.Integer;
-    intellectual_level: Schema.Attribute.String;
-    diagnosis: Schema.Attribute.Text;
-    food_allergy: Schema.Attribute.Text;
-    drug_allergy: Schema.Attribute.Text;
-    surgery_record: Schema.Attribute.Text;
-    diet_type: Schema.Attribute.String;
-    injection_record: Schema.Attribute.Text;
-    guardians: Schema.Attribute.Relation<'oneToMany', 'api::guardian.guardian'>;
-    image: Schema.Attribute.Media<'images'>;
-    branch: Schema.Attribute.Relation<'manyToOne', 'api::branch.branch'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -1169,15 +989,9 @@ declare module '@strapi/strapi' {
       'api::branch.branch': ApiBranchBranch;
       'api::brand.brand': ApiBrandBrand;
       'api::category.category': ApiCategoryCategory;
-      'api::customer.customer': ApiCustomerCustomer;
-      'api::guardian.guardian': ApiGuardianGuardian;
-      'api::invoice.invoice': ApiInvoiceInvoice;
-      'api::job.job': ApiJobJob;
       'api::order.order': ApiOrderOrder;
       'api::order-product.order-product': ApiOrderProductOrderProduct;
       'api::product.product': ApiProductProduct;
-      'api::revenue.revenue': ApiRevenueRevenue;
-      'api::trainee.trainee': ApiTraineeTrainee;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;

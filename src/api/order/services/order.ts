@@ -51,6 +51,40 @@ export default factories.createCoreService('api::order.order',
                 });
             }
             return res;
+        },
+
+
+        async reports() {
+            const orders = await strapi.documents('api::order.order').findMany();
+            const products = await strapi.documents('api::product.product').findMany();
+            const monthlyTotals = new Array(12).fill(0);
+            const monthlyOrders = new Array(12).fill(0);
+            const monthlyCash = new Array(12).fill(0);
+            const monthlyCard = new Array(12).fill(0);
+
+            orders.forEach(order => {
+                const orderDate = new Date(order.order_date);
+                const month = orderDate.getUTCMonth();
+                monthlyTotals[month] += order.amount;
+                monthlyOrders[month]++;
+                if(order.payment_type=='cash'){
+                    monthlyCash[month]++;
+                }else if(order.payment_type=='card'){
+                    monthlyCard[month]++;
+                }
+            });
+
+            const monthlyPayment = monthlyCash.map((cash, index) => ({
+                cash,
+                card: monthlyCard[index],
+            }));
+
+            const inventory = {
+                labels: products.map(product => product.name),
+                series: products.map(product => product.quantity)
+            };
+
+            return { monthlyTotals, monthlyOrders, monthlyPayment, inventory };
         }
     })
 );

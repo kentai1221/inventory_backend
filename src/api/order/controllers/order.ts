@@ -11,4 +11,7 @@ export default factories.createCoreController('api::order.order',({ strapi }) =>
     async search(ctx) {
         return await strapi.service("api::order.order").search(ctx);
     },
+    async reports() {
+        return await strapi.service("api::order.order").reports();
+    },
 }));
