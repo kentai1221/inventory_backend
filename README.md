@@ -1,4 +1,4 @@
-# 🚀 Getting started with Strapi
+# COMP5322 Inventory System Backend
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
 
